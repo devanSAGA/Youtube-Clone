@@ -1,6 +1,6 @@
 import React from "react";
-import VideoList from "./VideoList";
 import MainVideo from "./MainVideo";
+import VideoList from "./VideoList";
 
 const Videos = props => {
   const { videos, selectedVideo, changeSelectedVideo } = props;

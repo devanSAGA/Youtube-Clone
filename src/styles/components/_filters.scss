@@ -1,0 +1,38 @@
+.filters {
+  display: -webkit-flex;
+  display: flex;
+  justify-content: flex-end;
+  width: 100%;
+  padding: 2rem 2rem 0 0;
+
+  &__sortBy {
+    &--label {
+      font-size: $font-size-xs;
+      color: $secondary-text-color;
+      font-weight: bold;
+    }
+    &--dropdown {
+      border: none;
+      border-radius: 2px;
+      -moz-appearance: none;
+      -webkit-appearance: none;
+      appearance: none;
+      outline: none;
+      width: 13rem;
+      height: 3.5rem;
+      font-size: $font-size-xs;
+      padding: 5px 1rem;
+      color: $primary-text-color;
+      background: url("data:image/svg+xml;utf8,<svg fill='white' height='24' viewBox='0 0 24 24' width='24' xmlns='http://www.w3.org/2000/svg'><path d='M7 10l5 5 5-5z'/><path d='M0 0h24v24H0z' fill='none'/></svg>")
+        no-repeat right $tertiary-color;
+      background-position-x: 100px;
+      background-position-y: 7px;
+    }
+  }
+}
+
+@media only screen and (max-width: 768px) {
+  .filters {
+    padding: 2rem 0 0 0;
+  }
+}

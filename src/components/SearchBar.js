@@ -10,6 +10,12 @@ const Searchbar = props => {
         placeholder="Search YouTube..."
         value={searchQuery}
         onChange={changeSearchQuery}
+        onKeyPress={event => {
+          let keyCode = event.keyCode || event.which;
+          if (keyCode === 13) {
+            handleSearch();
+          }
+        }}
         className="header__searchbar--box"
       />
       <button onClick={handleSearch} className="header__searchbar--button">
