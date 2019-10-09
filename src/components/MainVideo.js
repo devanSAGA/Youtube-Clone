@@ -1,13 +1,14 @@
 import React from "react";
+import MessageBox from "./MessageBox";
 
 const MainVideo = ({ selectedVideo: video }) => {
   if (!video) {
-    return null;
+    return <MessageBox>Loading...</MessageBox>;
   }
   const videoId = video.id.videoId;
   const videoURL = `https://www.youtube.com/embed/${videoId}`;
   return (
-    <div className="main-video">
+    <div className="main-video" key={videoId}>
       <div className="main-video__iframe">
         <iframe
           title="iframe"

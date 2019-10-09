@@ -16,6 +16,18 @@ body {
   background-color: $primary-color;
 }
 
+.App {
+  display: -webkit-flex;
+  display: -ms-flex;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  max-width: 1160px;
+  min-height: 100%;
+  margin: 0 auto;
+  padding: 0 2rem;
+}
+
 //Displays on Desktop and hides on Mobile
 .show-for-desktop {
   @media (max-width: $desktop-breakpoint - 0.1rem) {

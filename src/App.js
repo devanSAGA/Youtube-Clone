@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import Header from "./components/Header";
 import Filters from "./components/Filters";
+import MessageBox from "./components/MessageBox";
 import Videos from "./components/Videos";
 import axios from "axios";
 import "./App.css";
@@ -10,7 +11,9 @@ class App extends Component {
     videos: [],
     defaultList: [],
     selectedVideo: null,
-    sortBy: "Relevance"
+    sortBy: "relevance",
+    isLoading: false,
+    error: null
   };
 
   changeSearchQuery = event => {
@@ -22,6 +25,7 @@ class App extends Component {
   handleSearch = () => {
     let API_URL = "https://www.googleapis.com/youtube/v3/search";
     if (this.state.searchQuery) {
+      this.setState({ isLoading: true });
       const params = {
         key: process.env.REACT_APP_API_KEY,
         q: this.state.searchQuery,
@@ -29,12 +33,12 @@ class App extends Component {
         type: "video",
         maxResults: 25
       };
-
       axios
         .get(API_URL, { params: params })
         .then(response => {
           this.setState(
             {
+              isLoading: false,
               videos: response.data.items,
               defaultList: response.data.items,
               selectedVideo: response.data.items[0]
@@ -45,7 +49,10 @@ class App extends Component {
           );
         })
         .catch(error => {
-          console.log(error);
+          this.setState({
+            isLoading: false,
+            error
+          });
         });
     }
   };
@@ -92,7 +99,13 @@ class App extends Component {
   };
 
   render() {
-    const { searchQuery, videos, selectedVideo, sortBy } = this.state;
+    const {
+      searchQuery,
+      videos,
+      selectedVideo,
+      sortBy,
+      isLoading
+    } = this.state;
     return (
       <div className="App">
         <Header
@@ -101,11 +114,17 @@ class App extends Component {
           handleSearch={this.handleSearch}
         />
         <Filters sortBy={sortBy} changeSortBy={this.changeSortBy} />
-        <Videos
-          videos={videos}
-          selectedVideo={selectedVideo}
-          changeSelectedVideo={this.changeSelectedVideo}
-        />
+        {isLoading ? (
+          <MessageBox>Loading...</MessageBox>
+        ) : videos.length === 0 ? (
+          <MessageBox>No videos to display. Search something!</MessageBox>
+        ) : (
+          <Videos
+            videos={videos}
+            selectedVideo={selectedVideo}
+            changeSelectedVideo={this.changeSelectedVideo}
+          />
+        )}
       </div>
     );
   }

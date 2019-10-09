@@ -12,12 +12,12 @@
       font-weight: bold;
     }
     &--dropdown {
+      cursor: pointer;
       border: none;
       border-radius: 2px;
       -moz-appearance: none;
       -webkit-appearance: none;
       appearance: none;
-      outline: none;
       width: 13rem;
       height: 3.5rem;
       font-size: $font-size-xs;
