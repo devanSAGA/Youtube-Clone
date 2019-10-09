@@ -1,0 +1,31 @@
+*,
+*::after,
+*::before {
+  margin: 0;
+  padding: 0;
+  box-sizing: inherit;
+}
+
+html,
+body,
+#root {
+  min-height: 100%;
+}
+
+body {
+  background-color: $primary-color;
+}
+
+//Displays on Desktop and hides on Mobile
+.show-for-desktop {
+  @media (max-width: $desktop-breakpoint - 0.1rem) {
+    display: none;
+  }
+}
+
+//Displays on Mobile and hides on Desktop
+.show-for-mobile {
+  @media (min-width: $desktop-breakpoint) {
+    display: none;
+  }
+}

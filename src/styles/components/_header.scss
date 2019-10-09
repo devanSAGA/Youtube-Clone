@@ -1,0 +1,50 @@
+.header {
+  display: -webkit-flex;
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  align-items: center;
+  padding: 2rem 0;
+  border-bottom: 1px solid $secondary-color;
+
+  &__logo {
+    color: $primary-brand-color;
+  }
+
+  &__searchbar {
+    display: -webkit-flex;
+    display: flex;
+    height: 4.5rem;
+
+    &--box {
+      background-color: $secondary-color;
+      color: $primary-text-color;
+      width: 50rem;
+      padding: 1.5rem;
+      border: none;
+      border-radius: 0;
+    }
+
+    &--button {
+      background-color: $tertiary-color;
+      color: $primary-text-color;
+      cursor: pointer;
+      outline: none;
+      border: none;
+      border-radius: 0;
+      padding: 0 2.5rem;
+    }
+  }
+}
+
+@media only screen and (max-width: 768px) {
+  .header__searchbar {
+    width: 100%;
+    &--box {
+      width: 100%;
+    }
+    &--button {
+      padding: 0 1.5rem;
+    }
+  }
+}

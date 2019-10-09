@@ -2,9 +2,10 @@ import React, { Component } from "react";
 import Header from "./components/Header";
 import Videos from "./components/Videos";
 import axios from "axios";
+import "./App.css";
 class App extends Component {
   state = {
-    searchQuery: "the local train",
+    searchQuery: "",
     videos: [],
     selectedVideo: null
   };
@@ -22,7 +23,8 @@ class App extends Component {
         key: process.env.REACT_APP_API_KEY,
         q: this.state.searchQuery,
         part: "snippet",
-        type: "video"
+        type: "video",
+        maxResults: 25
       };
 
       axios.get(API_URL, { params: params }).then(response => {

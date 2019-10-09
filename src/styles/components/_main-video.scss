@@ -1,0 +1,50 @@
+.main-video {
+  display: -webkit-flex;
+  display: flex;
+  flex-direction: column;
+  border-bottom: 1px solid $secondary-color;
+  width: 100%;
+
+  &__iframe {
+    position: relative;
+    width: 100%;
+    padding-top: 56.25%;
+  }
+
+  &__iframe iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+  }
+
+  &__info {
+    padding: 2rem 0;
+    text-align: left;
+
+    &--title {
+      font-size: $font-size-m;
+      color: $primary-text-color;
+      font-weight: bold;
+      margin-bottom: 3px;
+    }
+
+    &--channel {
+      font-size: $font-size-s;
+      color: $primary-brand-color;
+      font-weight: bold;
+    }
+  }
+}
+
+@media only screen and (max-width: 768px) {
+  .main-video__info {
+    &--title {
+      font-size: $font-size-s;
+    }
+    &--channel {
+      font-size: $font-size-xs;
+    }
+  }
+}
