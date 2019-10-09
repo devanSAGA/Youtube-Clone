@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import Header from "./components/Header";
+import Videos from "./components/Videos";
 import axios from "axios";
 class App extends Component {
   state = {
@@ -8,7 +9,7 @@ class App extends Component {
     selectedVideo: null
   };
 
-  handleSearchQueryChange = event => {
+  changeSearchQuery = event => {
     this.setState({
       searchQuery: event.target.value
     });
@@ -33,13 +34,25 @@ class App extends Component {
     }
   };
 
+  changeSelectedVideo = video => {
+    this.setState({
+      selectedVideo: video
+    });
+  };
+
   render() {
+    const { searchQuery, videos, selectedVideo } = this.state;
     return (
       <div className="App">
         <Header
-          searchQuery={this.state.searchQuery}
-          handleSearchQueryChange={this.handleSearchQueryChange}
+          searchQuery={searchQuery}
+          changeSearchQuery={this.changeSearchQuery}
           handleSearch={this.handleSearch}
+        />
+        <Videos
+          videos={videos}
+          selectedVideo={selectedVideo}
+          changeSelectedVideo={this.changeSelectedVideo}
         />
       </div>
     );

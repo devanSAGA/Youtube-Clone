@@ -2,12 +2,12 @@ import React from "react";
 import SearchBar from "./SearchBar";
 
 const Header = props => {
-  const { searchQuery, handleSearchQueryChange, handleSearch } = props;
+  const { searchQuery, changeSearchQuery, handleSearch } = props;
   return (
     <header>
       <SearchBar
         searchQuery={searchQuery}
-        handleSearchQueryChange={handleSearchQueryChange}
+        changeSearchQuery={changeSearchQuery}
         handleSearch={handleSearch}
       />
     </header>
