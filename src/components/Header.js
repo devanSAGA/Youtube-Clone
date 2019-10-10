@@ -2,6 +2,7 @@ import React from "react";
 import SearchBar from "./SearchBar";
 import FeatherIcon from "feather-icons-react";
 
+//renders Header which includes logo and searchbar.
 const Header = props => {
   const { changeSearchQuery } = props;
   return (
