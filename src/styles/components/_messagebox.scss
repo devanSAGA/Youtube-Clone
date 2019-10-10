@@ -7,10 +7,21 @@
   align-items: center;
   padding: 15rem 0;
   &--text {
+    display: -webkit-flex;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     color: $secondary-text-color;
     font-size: $font-size-s;
     padding: 2rem;
     border-radius: 7px;
     border: 1px solid $secondary-text-color;
+  }
+
+  &--icon {
+    color: $secondary-text-color;
+    padding-right: 1rem;
+    margin: 0;
+    line-height: 0;
   }
 }

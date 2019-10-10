@@ -1,10 +1,9 @@
-import React, { Component } from "react";
+import React, { Component, Fragment } from "react";
 import Header from "./components/Header";
 import Filters from "./components/Filters";
 import MessageBox from "./components/MessageBox";
 import Videos from "./components/Videos";
 import axios from "axios";
-import "./App.css";
 class App extends Component {
   state = {
     searchQuery: "",
@@ -36,17 +35,12 @@ class App extends Component {
       axios
         .get(API_URL, { params: params })
         .then(response => {
-          this.setState(
-            {
-              isLoading: false,
-              videos: response.data.items,
-              defaultList: response.data.items,
-              selectedVideo: response.data.items[0]
-            },
-            () => {
-              this.sortVideos(this.state.sortBy);
-            }
-          );
+          this.setState({
+            isLoading: false,
+            selectedVideo: response.data.items[0],
+            videos: response.data.items.slice(1),
+            defaultList: response.data.items
+          });
         })
         .catch(error => {
           this.setState({
@@ -75,17 +69,15 @@ class App extends Component {
   };
 
   sortVideos = sortBy => {
-    let videos = this.state.videos;
-    if (sortBy === "relevance") {
-      videos = this.state.defaultList.slice();
-    } else if (sortBy === "date") {
+    let videos = this.state.defaultList.slice();
+    if (sortBy === "date") {
       videos.sort((videoA, videoB) => {
         return (
           new Date(videoB.snippet.publishedAt) -
           new Date(videoA.snippet.publishedAt)
         );
       });
-    } else {
+    } else if (sortBy === "title") {
       videos.sort((videoA, videoB) => {
         const titleA = videoA.snippet.title.toLowerCase();
         const titleB = videoB.snippet.title.toLowerCase();
@@ -94,7 +86,7 @@ class App extends Component {
     }
     this.setState({
       selectedVideo: videos[0],
-      videos: videos
+      videos: videos.slice(1)
     });
   };
 
@@ -113,17 +105,19 @@ class App extends Component {
           changeSearchQuery={this.changeSearchQuery}
           handleSearch={this.handleSearch}
         />
-        <Filters sortBy={sortBy} changeSortBy={this.changeSortBy} />
         {isLoading ? (
-          <MessageBox>Loading...</MessageBox>
+          <MessageBox icon="loader">Loading...</MessageBox>
         ) : videos.length === 0 ? (
           <MessageBox>No videos to display. Search something!</MessageBox>
         ) : (
-          <Videos
-            videos={videos}
-            selectedVideo={selectedVideo}
-            changeSelectedVideo={this.changeSelectedVideo}
-          />
+          <Fragment>
+            <Filters sortBy={sortBy} changeSortBy={this.changeSortBy} />
+            <Videos
+              videos={videos}
+              selectedVideo={selectedVideo}
+              changeSelectedVideo={this.changeSelectedVideo}
+            />
+          </Fragment>
         )}
       </div>
     );
