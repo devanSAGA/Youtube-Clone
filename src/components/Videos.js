@@ -1,7 +1,7 @@
 import React, { Component, Fragment } from "react";
 import Filters from "./Filters";
 import MessageBox from "./MessageBox";
-import MainVideo from "./MainVideo";
+import VideoScreen from "./VideoScreen";
 import VideoList from "./VideoList";
 import axios from "axios";
 
@@ -11,6 +11,7 @@ class Videos extends Component {
     defaultList: [],
     selectedVideo: null,
     sortBy: "relevance",
+    numberOfVideos: 10,
     isLoading: false,
     error: null
   };
@@ -31,17 +32,22 @@ class Videos extends Component {
         q: this.props.searchQuery,
         part: "snippet",
         type: "video",
-        maxResults: 25
+        maxResults: this.state.numberOfVideos
       };
       axios
         .get(API_URL, { params: params })
         .then(response => {
-          this.setState({
-            isLoading: false,
-            selectedVideo: response.data.items[0],
-            videos: response.data.items,
-            defaultList: response.data.items
-          });
+          this.setState(
+            {
+              isLoading: false,
+              selectedVideo: response.data.items[0],
+              videos: response.data.items,
+              defaultList: response.data.items
+            },
+            () => {
+              this.sortVideos(this.state.sortBy);
+            }
+          );
         })
         .catch(error => {
           this.setState({
@@ -57,8 +63,19 @@ class Videos extends Component {
     this.setState({
       selectedVideo: video
     });
+    window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
+  changeNumberOfVideos = selectedOption => {
+    this.setState(
+      {
+        numberOfVideos: selectedOption
+      },
+      () => {
+        this.handleSearch();
+      }
+    );
+  };
   //This method lets you change sorting parameter.
   changeSortBy = selectedOption => {
     this.setState(
@@ -95,7 +112,14 @@ class Videos extends Component {
   };
 
   render() {
-    const { videos, selectedVideo, error, isLoading, sortBy } = this.state;
+    const {
+      videos,
+      selectedVideo,
+      error,
+      isLoading,
+      sortBy,
+      numberOfVideos
+    } = this.state;
     if (error) {
       return (
         <MessageBox icon="alert-triangle">
@@ -103,20 +127,27 @@ class Videos extends Component {
         </MessageBox>
       );
     }
-    return isLoading ? (
-      <MessageBox icon="loader">Loading...</MessageBox>
-    ) : videos.length === 0 ? (
-      <MessageBox>No videos to display. Search something!</MessageBox>
-    ) : (
+    return (
       <Fragment>
-        <Filters sortBy={sortBy} changeSortBy={this.changeSortBy} />
-        <div className="videos-container">
-          <MainVideo selectedVideo={selectedVideo} />
-          <VideoList
-            videos={videos}
-            changeSelectedVideo={this.changeSelectedVideo}
-          />
-        </div>
+        <Filters
+          sortBy={sortBy}
+          changeSortBy={this.changeSortBy}
+          numberOfVideos={numberOfVideos}
+          changeNumberOfVideos={this.changeNumberOfVideos}
+        />
+        {isLoading ? (
+          <MessageBox icon="loader">Loading...</MessageBox>
+        ) : videos.length === 0 ? (
+          <MessageBox>No videos to display. Search something!</MessageBox>
+        ) : (
+          <div className="videos-container">
+            <VideoScreen selectedVideo={selectedVideo} />
+            <VideoList
+              videos={videos}
+              changeSelectedVideo={this.changeSelectedVideo}
+            />
+          </div>
+        )}
       </Fragment>
     );
   }

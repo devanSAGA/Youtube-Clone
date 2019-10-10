@@ -5,7 +5,8 @@
   width: 100%;
   padding: 2rem 2rem 0 0;
 
-  &__sortBy {
+  &__option {
+    padding-left: 1rem;
     &--label {
       font-size: $font-size-xs;
       color: $secondary-text-color;

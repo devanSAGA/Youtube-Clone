@@ -1,4 +1,4 @@
-.main-video {
+.video-screen {
   display: -webkit-flex;
   display: flex;
   flex-direction: column;
@@ -39,7 +39,7 @@
 }
 
 @media only screen and (max-width: 768px) {
-  .main-video__info {
+  .video-screen__info {
     &--title {
       font-size: $font-size-s;
     }

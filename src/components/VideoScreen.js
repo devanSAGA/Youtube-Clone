@@ -1,15 +1,15 @@
 import React from "react";
-import MessageBox from "./MessageBox";
+// import MessageBox from "./MessageBox";
 
-const MainVideo = ({ selectedVideo: video }) => {
+const VideoScreen = ({ selectedVideo: video }) => {
   if (!video) {
-    return <MessageBox>Loading...</MessageBox>;
+    return null;
   }
   const videoId = video.id.videoId;
   const videoURL = `https://www.youtube.com/embed/${videoId}`;
   return (
-    <div className="main-video" key={videoId}>
-      <div className="main-video__iframe">
+    <div className="video-screen" key={videoId}>
+      <div className="video-screen__iframe">
         <iframe
           title="iframe"
           src={videoURL}
@@ -18,9 +18,9 @@ const MainVideo = ({ selectedVideo: video }) => {
           allowFullScreen
         ></iframe>
       </div>
-      <div className="main-video__info">
-        <div className="main-video__info--title">{video.snippet.title}</div>
-        <div className="main-video__info--channel">
+      <div className="video-screen__info">
+        <div className="video-screen__info--title">{video.snippet.title}</div>
+        <div className="video-screen__info--channel">
           {`By ${video.snippet.channelTitle}`}
         </div>
       </div>
@@ -28,4 +28,4 @@ const MainVideo = ({ selectedVideo: video }) => {
   );
 };
 
-export default MainVideo;
+export default VideoScreen;

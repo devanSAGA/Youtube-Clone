@@ -19,10 +19,16 @@
     &--box {
       background-color: $secondary-color;
       color: $primary-text-color;
+      font-size: $font-size-s;
       width: 50rem;
-      padding: 1.5rem;
+      padding: 1rem;
       border: none;
       border-radius: 0;
+    }
+
+    &--box::placeholder,
+    &--box::-moz-placeholder {
+      color: $secondary-text-color;
     }
 
     &--button {
