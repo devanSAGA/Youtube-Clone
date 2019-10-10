@@ -1,6 +1,10 @@
 import React from "react";
 
-//Filters component gives you options to filter the video list. You can sort the videos based on their published date or video title.
+/** Filters component gives you options to filter the video list.
+ * You can filter by the number of videos displayed on the screen.
+ * You can also sort the videos based on their published date or video title.
+ */
+
 const Filters = props => {
   const { sortBy, changeSortBy, numberOfVideos, changeNumberOfVideos } = props;
   return (

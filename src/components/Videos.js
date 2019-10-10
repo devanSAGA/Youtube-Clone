@@ -1,9 +1,10 @@
 import React, { Component, Fragment } from "react";
+import axios from "axios";
 import Filters from "./Filters";
 import MessageBox from "./MessageBox";
 import VideoScreen from "./VideoScreen";
 import VideoList from "./VideoList";
-import axios from "axios";
+import { YOUTUBE_SEARCH_API_URL } from "../utils/config";
 
 class Videos extends Component {
   state = {
@@ -22,9 +23,8 @@ class Videos extends Component {
     }
   }
 
-  //This method sends GET request to Youtube API along with parameters and fetches corresponding results.
+  /** This method sends GET request to Youtube API along with parameters and fetches corresponding results. */
   handleSearch = () => {
-    let API_URL = "https://www.googleapis.com/youtube/v3/search";
     if (this.props.searchQuery) {
       this.setState({ isLoading: true });
       const params = {
@@ -35,7 +35,7 @@ class Videos extends Component {
         maxResults: this.state.numberOfVideos
       };
       axios
-        .get(API_URL, { params: params })
+        .get(YOUTUBE_SEARCH_API_URL, { params: params })
         .then(response => {
           this.setState(
             {
@@ -58,7 +58,7 @@ class Videos extends Component {
     }
   };
 
-  //Selected Video is the one which you can play. This method change the selected video to whichever video you click from the video list.
+  /** Selected Video is the one which you can play. This method change the selected video to whichever video you click from the video list.*/
   changeSelectedVideo = video => {
     this.setState({
       selectedVideo: video
@@ -76,7 +76,8 @@ class Videos extends Component {
       }
     );
   };
-  //This method lets you change sorting parameter.
+
+  /** This method lets you change sorting parameter. */
   changeSortBy = selectedOption => {
     this.setState(
       {
@@ -88,7 +89,7 @@ class Videos extends Component {
     );
   };
 
-  //This method sorts the videolist based on selected sorting paramter.
+  /** This method sorts the videolist based on selected sorting paramter. */
   sortVideos = sortBy => {
     let videos = this.state.defaultList.slice();
     if (sortBy === "date") {

@@ -1,5 +1,5 @@
 import React from "react";
-// import MessageBox from "./MessageBox";
+import { formateDate } from "../utils/functions";
 
 const VideoScreen = ({ selectedVideo: video }) => {
   if (!video) {
@@ -20,9 +20,12 @@ const VideoScreen = ({ selectedVideo: video }) => {
       </div>
       <div className="video-screen__info">
         <div className="video-screen__info--title">{video.snippet.title}</div>
-        <div className="video-screen__info--channel">
-          {`By ${video.snippet.channelTitle}`}
-        </div>
+        <span className="video-screen__info--channel">
+          {`By ${video.snippet.channelTitle} `}
+        </span>
+        <span className="video-screen__info--date">
+          {`on ${formateDate(video.snippet.publishedAt)}`}
+        </span>
       </div>
     </div>
   );

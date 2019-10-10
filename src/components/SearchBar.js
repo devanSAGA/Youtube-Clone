@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import FeatherIcon from "feather-icons-react";
 
-// A controlled component which renders search bar. User can type search query into searchbar and can trigger the youtube search.
+/** A controlled component which renders search bar. User can type search query into searchbar and can trigger the youtube search. */
 class Searchbar extends Component {
   state = {
     inputText: ""

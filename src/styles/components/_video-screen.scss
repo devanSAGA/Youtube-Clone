@@ -35,6 +35,12 @@
       color: $primary-brand-color;
       font-weight: bold;
     }
+
+    &--date {
+      font-size: $font-size-s;
+      color: $secondary-text-color;
+      font-weight: bold;
+    }
   }
 }
 

@@ -8,9 +8,11 @@ class App extends Component {
   };
 
   changeSearchQuery = searchQuery => {
-    this.setState({
-      searchQuery
-    });
+    if (searchQuery.trim()) {
+      this.setState({
+        searchQuery
+      });
+    }
   };
 
   render() {
