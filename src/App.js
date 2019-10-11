@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import Header from "./components/Header";
-import Videos from "./components/Videos";
+import VideosContainer from "./components/VideosContainer";
 import ErrorBoundary from "./components/ErrorBoundary";
 class App extends Component {
   state = {
@@ -21,7 +21,7 @@ class App extends Component {
       <div className="App">
         <Header changeSearchQuery={this.changeSearchQuery} />
         <ErrorBoundary>
-          <Videos searchQuery={searchQuery} />
+          <VideosContainer searchQuery={searchQuery} />
         </ErrorBoundary>
       </div>
     );

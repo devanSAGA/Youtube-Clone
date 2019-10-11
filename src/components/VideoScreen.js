@@ -21,7 +21,7 @@ const VideoScreen = ({ selectedVideo: video }) => {
       <div className="video-screen__info">
         <div className="video-screen__info--title">{video.snippet.title}</div>
         <span className="video-screen__info--channel">
-          {`By ${video.snippet.channelTitle} `}
+          {`Published By ${video.snippet.channelTitle} `}
         </span>
         <span className="video-screen__info--date">
           {`on ${formateDate(video.snippet.publishedAt)}`}

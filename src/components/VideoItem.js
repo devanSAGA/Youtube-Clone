@@ -18,7 +18,7 @@ const VideoItem = ({ video, changeSelectedVideo }) => {
           {trimText(video.snippet.title)}
         </span>
         <span className="video-item__info--date">
-          {`on ${formateDate(video.snippet.publishedAt)}`}
+          {`Published on ${formateDate(video.snippet.publishedAt)}`}
         </span>
       </div>
     </li>

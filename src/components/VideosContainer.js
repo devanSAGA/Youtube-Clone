@@ -6,7 +6,7 @@ import VideoScreen from "./VideoScreen";
 import VideoList from "./VideoList";
 import { YOUTUBE_SEARCH_API_URL } from "../utils/config";
 
-class Videos extends Component {
+class VideosContainer extends Component {
   state = {
     videos: [],
     defaultList: [],
@@ -107,7 +107,6 @@ class Videos extends Component {
       });
     }
     this.setState({
-      selectedVideo: videos[0],
       videos: videos
     });
   };
@@ -154,4 +153,4 @@ class Videos extends Component {
   }
 }
 
-export default Videos;
+export default VideosContainer;

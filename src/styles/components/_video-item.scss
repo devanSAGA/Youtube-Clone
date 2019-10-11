@@ -22,9 +22,12 @@
   }
 
   &__info {
-    color: $primary-text-color;
     font-size: $font-size-xs;
-    font-weight: bold;
+    &--title {
+      display: block;
+      color: $primary-text-color;
+      font-weight: bold;
+    }
 
     &--date {
       display: inline-block;
